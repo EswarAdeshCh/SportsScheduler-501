@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsHub Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans text-gray-700 bg-gray-100 min-h-screen flex flex-col">
+  <header>
+    <nav class="bg-gradient-to-r from-teal-700 to-teal-800 text-white py-6 px-8 shadow-md transition-all hover:bg-gradient-to-r hover:from-teal-800 hover:to-teal-700">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-3xl font-bold tracking-wide">SportsHub</a>
+        <button type="button" class="block md:hidden text-white focus:outline-none" onclick="toggleMenu()">
+          <span class="sr-only">Open menu</span>
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <div class="hidden md:flex space-x-8" id="navbar">
+          <a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition">Home</a>
+          <a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition">About Us</a>
+          <a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition">Our Features</a>
+          <a href="/signup" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition">Sign Up</a>
+          <a href="/login" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition">Login</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="text-center py-20 flex-1">
+    <p class="text-4xl font-bold text-gray-700 mb-4">Welcome to SportsHub</p>
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">Your go-to platform for organizing, scheduling, and managing sports events</p>
+
+    <section class="py-16 bg-gray-50 rounded-lg shadow-lg">
+      <h2 class="text-3xl font-semibold text-gray-700 mb-8">Core Features</h2>
+      <div class="flex flex-wrap justify-center gap-12">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs text-center transition-transform transform hover:translate-y-2 hover:shadow-xl">
+          <svg class="w-16 h-16 mx-auto mb-6 text-gray-700 hover:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"/>
+          </svg>
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Easy Scheduling</h3>
+          <p class="text-gray-600">Quickly schedule sports events, ensuring seamless coordination for all participants.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs text-center transition-transform transform hover:translate-y-2 hover:shadow-xl">
+          <svg class="w-16 h-16 mx-auto mb-6 text-gray-700 hover:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9l4-4m0 0l-4-4m4 4H3"/>
+          </svg>
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Team Management</h3>
+          <p class="text-gray-600">Create, manage, and track team rosters with ease and efficiency.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs text-center transition-transform transform hover:translate-y-2 hover:shadow-xl">
+          <svg class="w-16 h-16 mx-auto mb-6 text-gray-700 hover:text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"/>
+          </svg>
+          <h3 class="text-xl font-semibold text-gray-700 mb-4">Real-time Stats</h3>
+          <p class="text-gray-600">Get live updates on performance, scores, and game statistics at any moment.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-teal-800 text-white py-12 text-center mt-auto shadow-md">
+    <p class="text-lg">SportsHub</p>
+    <ul class="flex justify-center space-x-8 mt-4">
+      <li><a href="/" class="text-white font-medium hover:text-teal-300">About</a></li>
+      <li><a href="/" class="text-white font-medium hover:text-teal-300">Privacy Policy</a></li>
+      <li><a href="/" class="text-white font-medium hover:text-teal-300">Terms of Service</a></li>
+    </ul>
+  </footer>
+</body>
+</html>

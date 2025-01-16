@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-gradient-to-r from-teal-700 to-teal-800 text-white py-6 px-8 shadow-md transition-all hover:bg-gradient-to-r hover:from-teal-800 hover:to-teal-700">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Welcome to Reports Section</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Dashboard</a></li>
+                    <li><a href="/adminPage" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Go Back To Admin Page</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>    
+    <center>
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-semibold text-center mb-6 text-blue-600">Total <%= sessions.length %> Sessions Available Till Now</h1>
+            <table class="rounded-lg min-w-full table-auto border-collapse border border-gray-300">
+                <thead class="bg-blue-500 text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left border-b">Sport</th>
+                        <th class="py-3 px-4 text-left border-b">Date</th>
+                        <th class="py-3 px-4 text-left border-b">Time</th>
+                        <th class="py-3 px-4 text-left border-b">Place</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% sessions.forEach(session => { %>
+                        <tr class="hover:bg-blue-100">
+                            <td class="py-3 px-4 border-b"><%= session.sport %></td>
+                            <td class="py-3 px-4 border-b"><%= new Date(session.date).toISOString().split('T')[0] %></td>
+                            <td class="py-3 px-4 border-b"><%= session.time %></td>
+                            <td class="py-3 px-4 border-b"><%= session.place %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 text-blue-600">Sports Available</h2>
+                <table class="rounded-lg min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-green-500 text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left border-b">Sport Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% sports.forEach(sport => { %>
+                            <tr class="hover:bg-green-300">
+                                <td class="py-3 px-4 border-b"><%= sport %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 text-blue-600">Sessions Per Sport</h2>
+                <table class="min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-yellow-500 text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left border-b">Sport</th>
+                            <th class="py-3 px-4 text-left border-b">Number of Sessions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% sessionsPerSport.forEach(sportData => { %>
+                            <tr class="hover:bg-yellow-300">
+                                <td class="py-3 px-4 border-b"><%= sportData.sport %></td>
+                                <td class="py-3 px-4 border-b"><%= sportData.sessionCount %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</center>
+</body>
+</html>

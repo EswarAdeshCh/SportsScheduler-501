@@ -1,0 +1,50 @@
+<div id="sessionFormContainer" class="bg-white hidden rounded-lg my-5 shadow-md w-full">
+    <div class="flex flex-col items-center justify-center rounded-lg px-4 sm:px-8 lg:px-40 py-8">
+        <form action="/create-session" method="post" id="sessionForm" onsubmit="submitSessionForm(event)" class="bg-gray-100 py-4 px-6 rounded shadow-md w-full mb-4">
+            <h2 class="text-lg font-bold mb-6 text-center text-gray-800">Create Session</h2>
+            <div class="mb-5">
+                <label for="sport" class="block text-sm font-medium text-gray-700">Select Sport</label>
+                <select id="sport" name="sport" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                    <% sports.forEach(sport => { %>
+                        <option value="<%= sport %>"><%= sport %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4 justify-between items-center">
+                <div class="mb-5 w-full">
+                    <label for="teamA" class="block text-sm font-medium text-gray-700">Team A</label>
+                    <input type="text" id="teamA" name="teamA" placeholder="Enter team lead name" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                    <label for="teamASize" class="block text-sm font-medium text-gray-700 mt-2">Team A Size</label>
+                    <input type="number" id="teamASize" name="teamASize" placeholder="Enter team size" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                </div>
+                <div class="mb-5 w-full">
+                    <label for="teamB" class="block text-sm font-medium text-gray-700">Team B</label>
+                    <input type="text" id="teamB" name="teamB" placeholder="Enter team lead name" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                    <label for="teamBSize" class="block text-sm font-medium text-gray-700 mt-2">Team B Size</label>
+                    <input type="number" id="teamBSize" name="teamBSize" placeholder="Enter team size" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                </div>
+            </div>
+            <div class="mb-5">
+                <label for="actualSize" class="block text-sm font-medium text-gray-700 mt-2">Actual Size of a Team</label>
+                <input type="number" id="actualSize" name="actualSize" placeholder="Enter actual size of a team" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+            </div>
+            <div class="mb-5">
+                <label for="place" class="block text-sm font-medium text-gray-700">Place</label>
+                <input type="text" id="place" name="place" placeholder="Enter session place" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4 justify-between items-center">
+                <div class="mb-5 w-full">
+                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                </div>
+                <div class="mb-5 w-full">
+                    <label for="time" class="block text-sm font-medium text-gray-700">Time</label>
+                    <input type="time" id="time" name="time" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700" required>
+                </div>
+            </div>
+            <button type="submit" class="mt-4 w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700">
+                Create Session
+            </button>
+        </form>
+    </div>
+</div>

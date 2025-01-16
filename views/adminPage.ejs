@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+</head>
+<body class="bg-gray-900 min-h-screen text-white">
+    <header class="bg-gradient-to-r from-teal-700 to-teal-800 text-white py-6 px-8 shadow-md transition-all hover:bg-gradient-to-r hover:from-teal-800 hover:to-teal-700">
+      <div class="container mx-auto flex justify-between items-center">
+          <h1 class="text-xl font-bold">Welcome to Admin Dashboard</h1>
+          <nav>
+              <ul class="flex space-x-6">
+                  <li><a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Dashboard</a></li>
+                  <li><a href="/reports" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Reports</a></li>
+                  <li><a href="/signout" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Sign Out</a></li>
+              </ul>
+          </nav>
+      </div>
+  </header>
+    <div class="p-8 space-y-6">
+        <div class="bg-gray-800 shadow-xl rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-center mb-4">Add Sport</h2>
+            <form action="/adminPage" method="post" class="space-y-4" onsubmit="return validateSport()">
+                <div class="flex justify-center">
+                    <input 
+                        type="text" 
+                        id="sport" 
+                        name="sport" 
+                        placeholder="Enter a sport" 
+                        required
+                        class="w-96 p-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-700 text-white">
+                </div>
+                <div class="flex justify-center">
+                    <button 
+                        type="submit"
+                        class="w-96 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Add Sport
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        
+    </div>
+
+
+    <div class="bg-gray-800 shadow-xl rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">Added Sports</h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <% sports.forEach(sport => { %>
+                <li class="bg-gray-700 p-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 ease-in-out flex flex-col items-center" data-sport="<%= sport %>">
+                    <h3 class="text-xl font-semibold mb-2"><%= sport %></h3>
+                    <button onclick="deleteSport('<%= sport %>')" 
+                        class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
+                        Delete
+                    </button>
+                    <button type="submit" onclick="openSessionForm()"
+                        class="w-full bg-green-600 text-white py-2 mt-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300">
+                        Create Session
+                    </button>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+    <%- include('createSessions') %>
+    <br>
+    <%- include('availableSessions') %>
+    <%- include('updateSessionForm') %>
+</body>
+</html>

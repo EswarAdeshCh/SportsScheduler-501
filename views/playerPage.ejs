@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 min-h-screen text-white">
+    <header class="bg-gradient-to-r from-teal-700 to-teal-800 text-white py-6 px-8 shadow-md transition-all hover:bg-gradient-to-r hover:from-teal-800 hover:to-teal-700">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Welcome to Player Dashboard</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Dashboard</a></li>
+                    <li><a href="/signout" class="text-white font-bold px-4 py-2 rounded-md hover:bg-teal-800 hover:scale-105 transform transition ">Sign Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header> 
+
+    <div class="p-6 rounded-lg shadow-md w-full">
+        <div class="mt-4 bg-gray-800 p-6 rounded-lg shadow-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Available Sports:</h2>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <% sports.forEach(sport => { %>
+                    <li class="bg-gray-700 p-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 ease-in-out flex flex-col items-center" data-sport="<%= sport %>">
+                        <h1 class="text-xl font-semibold mb-2"><%= sport %></h1>
+                        
+                    <button type="submit" onclick="openSessionForm()"
+                        class="w-full bg-green-600 text-white py-2 mt-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300">
+                        Create Session
+                    </button>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+        <%- include('createSessions') %>
+        <br>
+        <%- include('joinSessions') %>
+        <br>
+        <%- include('updateSessionForm') %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scheduler App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hover-button:hover {
+            transform: scale(1.08);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen text-white flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg fade-in">
+        <h1 class="text-3xl font-bold text-center text-red-700 mb-6">Unauthorized Access</h1>
+        <p class="text-center text-red-500 text-lg font-medium mb-8">Invalid Email or Password</p>
+        
+        <div class="text-center">
+            <a href="/login" class="w-full bg-teal-600 text-white py-3 px-4 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+                Back to LogIn
+            </a>
+        </div>
+    </div>
+</body>
+</html>

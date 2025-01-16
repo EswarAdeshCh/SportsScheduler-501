@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2 class="text-2xl font-semibold text-center mb-6 text-white-800">Sessions Available</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
+    <% sessions.forEach(session => { %>
+        <div class="session-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out">
+            <div class="text-center mb-4">
+                <p class="text-xl font-semibold text-gray-700"><%= session.sport %></p>
+            </div>
+            
+            <div class="space-y-3">
+                <p class="text-lg text-gray-800"><strong class="font-semibold text-indigo-600">Team A:</strong> <%= session.teamA %></p>
+                <p class="text-lg text-gray-800"><strong class="font-semibold text-indigo-600">Team B:</strong> <%= session.teamB %></p>
+                <p class="text-lg text-gray-800"><strong class="font-semibold text-indigo-600">Place:</strong> <%= session.place %></p>
+                <p class="text-lg text-gray-800"><strong class="font-semibold text-indigo-600">Date:</strong> <%= session.date.toLocaleDateString() %></p>
+                <p class="text-lg text-gray-800"><strong class="font-semibold text-indigo-600">Time:</strong> <%= session.time %></p><br>
+                <center>
+                    <strong class="font-semibold text-indigo-600">
+                        <%= 
+                        (parseInt(session.actualSize)+parseInt(session.actualSize) - (parseInt(session.teamBsize) + parseInt(session.teamAsize) ) ) === 0
+                        ? "No slots are Avaliable..."
+                        : `Avaliable slots are ${(parseInt(session.actualSize)+parseInt(session.actualSize) - (parseInt(session.teamBsize) + parseInt(session.teamAsize) ) )} `
+                        %>
+                    </strong>
+                </center>
+                
+            </div>
+
+            <div class="mt-6 flex gap-4 justify-between" data-session-id="<%= session.id %>">
+                <button type="button" onclick="deleteSession('<%= session.id %>')" class="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg w-1/2 transition duration-200 ease-in-out transform hover:scale-105">
+                    Delete
+                </button>
+                <a href="#updateSessionFormContainer" class="text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg w-1/2 transition duration-200 ease-in-out transform hover:scale-105">
+                    <button type="button" onclick="updateSession('<%= session.id %>', '<%= JSON.stringify(sessions) %>')">
+                        Edit
+                    </button>
+                </a>
+            </div>
+        </div>
+    <% }); %>
+</div>
+</body>
+</html>
