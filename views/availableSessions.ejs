@@ -12,6 +12,7 @@
 <h2 class="text-2xl font-semibold text-center mb-6 text-white-800">Sessions Available</h2>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
     <% sessions.forEach(session => { %>
+        
         <div class="session-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out">
             <div class="text-center mb-4">
                 <p class="text-xl font-semibold text-gray-700"><%= session.sport %></p>
@@ -39,8 +40,8 @@
                 <button type="button" onclick="deleteSession('<%= session.id %>')" class="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg w-1/2 transition duration-200 ease-in-out transform hover:scale-105">
                     Delete
                 </button>
-                <a href="#updateSessionFormContainer" class="text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg w-1/2 transition duration-200 ease-in-out transform hover:scale-105">
-                    <button type="button" onclick="updateSession('<%= session.id %>', '<%= JSON.stringify(sessions) %>')">
+                <a href="/updateSessionForm/<%= session.id %>" class="text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg w-1/2 transition duration-200 ease-in-out transform hover:scale-105">
+                    <button type="button">
                         Edit
                     </button>
                 </a>

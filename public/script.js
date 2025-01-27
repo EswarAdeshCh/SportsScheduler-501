@@ -14,28 +14,30 @@ function validateSport() {
   return true;
 }
 
-
 async function deleteSport(sportName) {
   try {
-      const response = await fetch(`/adminPage/${sportName}`, { method: 'DELETE' });
-      const sports = await response.json();
+    const response = await fetch(`/adminPage/${sportName}`, {
+      method: "DELETE",
+    });
+    const sports = await response.json();
 
-      const sportItem = document.querySelector(`li[data-sport="${sportName}"]`);
-      if (sportItem) {
-          sportItem.remove();
-      }
+    const sportItem = document.querySelector(`li[data-sport="${sportName}"]`);
+    if (sportItem) {
+      sportItem.remove();
+    }
   } catch (error) {
-      console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
-
 
 function openSessionForm() {
   document.getElementById("sessionFormContainer").style.display = "block";
 }
 
 function updateSession(sessionId, sessions) {
+  // console.log("working or not");
   sessions = JSON.parse(sessions);
+
   console.log("Update the form where the id is:", sessionId);
 
   const formContainer = document.getElementById("updateSessionFormContainer");
@@ -54,19 +56,19 @@ function updateSession(sessionId, sessions) {
     return;
   }
 
-  document.getElementById("sessionId").value = session.id || "";
-  document.getElementById("sport").value = session.sport || "";
-  document.getElementById("teamA").value = session.teamA || "";
+  document.getElementById("sessionId").value = session.id;
+  document.getElementById("sport").value = session.sport;
+  document.getElementById("teamA").value = session.teamA;
   document.getElementById("teamASize").value = parseInt(session.teamAsize) || 0;
-  document.getElementById("teamB").value = session.teamB || "";
+  document.getElementById("teamB").value = session.teamB;
   document.getElementById("teamBSize").value = parseInt(session.teamBsize) || 0;
   document.getElementById("actualSize").value =
     parseInt(session.actualSize) || 0;
-  document.getElementById("place").value = session.place || "";
+  document.getElementById("place").value = session.place;
   document.getElementById("date").value = session.date
     ? session.date.split("T")[0]
     : "";
-  document.getElementById("time").value = session.time || "";
+  document.getElementById("time").value = session.time;
 }
 
 async function submitSessionForm(event) {
@@ -111,26 +113,22 @@ async function submitSessionForm(event) {
 }
 
 function deleteSession(sessionId) {
-  if (confirm("Are you sure you want to delete this session?")) {
-    fetch(`/delete-session/${sessionId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  fetch(`/delete-session/${sessionId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload(); // Reload the page to reflect the changes
+      } else {
+        console.error("Failed to delete the session.");
+      }
     })
-      .then((response) => {
-        if (response.ok) {
-          alert("Session deleted successfully.");
-          location.reload();
-        } else {
-          alert("Failed to delete the session.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("An error occurred while deleting the session.");
-      });
-  }
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 function getFormData(event) {
@@ -147,8 +145,6 @@ function getFormData(event) {
     date: form.date.value,
     time: form.time.value,
   };
-
-  console.log(sessionData);
 
   fetch("/update-session", {
     method: "POST",
