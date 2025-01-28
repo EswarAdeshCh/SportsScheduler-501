@@ -35,11 +35,7 @@ function openSessionForm() {
 }
 
 function updateSession(sessionId, sessions) {
-  // console.log("working or not");
   sessions = JSON.parse(sessions);
-
-  console.log("Update the form where the id is:", sessionId);
-
   const formContainer = document.getElementById("updateSessionFormContainer");
   if (formContainer) {
     formContainer.style.display = "block";
@@ -75,9 +71,7 @@ async function submitSessionForm(event) {
   event.preventDefault();
   const form = document.getElementById("sessionForm");
   const formData = new FormData(form);
-
   const formObject = {};
-
   formData.forEach((value, key) => {
     if (!isNaN(value) && value.trim() !== "") {
       formObject[key] = parseInt(value, 10);
@@ -121,7 +115,7 @@ function deleteSession(sessionId) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload(); // Reload the page to reflect the changes
+        location.reload();
       } else {
         console.error("Failed to delete the session.");
       }

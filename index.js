@@ -17,29 +17,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const saltRounds = 10;
-// Session setup
 app.use(
   session({
     secret: "your-secret-key",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000 * 60 * 60 }, // Set session expiration
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 },
   })
 );
-
-// Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Authentication check middleware
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return next(); // If the user is authenticated, proceed to the next middleware/route
+    return next();
   }
-  res.redirect("/login"); // If not authenticated, redirect to login page
+  res.redirect("/login");
 }
-
-// Passport local strategy for authentication
 passport.use(
   new LocalStrategy(async (email, password, done) => {
     try {
@@ -49,7 +43,6 @@ passport.use(
         return done(null, false, { message: "Invalid credentials" });
       }
 
-      // Use bcrypt to compare the provided password with the hashed password
       const isValid = await bcrypt.compare(password, user.password);
 
       if (!isValid) {
@@ -63,17 +56,15 @@ passport.use(
   })
 );
 
-// Serialize user to store user ID in session
 passport.serializeUser((user, done) => {
-  done(null, user.id); // Use the user ID as the session identifier
+  done(null, user.id);
 });
 
-// Deserialize user from session
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await Users.findByPk(id);
     if (user) {
-      done(null, user); // User is properly deserialized
+      done(null, user);
     } else {
       done(new Error("User not found"), null);
     }
@@ -164,11 +155,9 @@ app.get("/updateSessionForm/:id", isAuthenticated, async (req, res) => {
 });
 app.post("/updateSessionForm", isAuthenticated, async (req, res) => {
   try {
-    // Override the sessionId in req.body with req.sessionID
     const sessionId = req.body.sessionId;
 
     sessionData = req.body;
-    // Log the updated req.body
     try {
       const result = await Sessions.updateSession(sessionId, sessionData);
 
@@ -183,9 +172,6 @@ app.post("/updateSessionForm", isAuthenticated, async (req, res) => {
         .status(500)
         .json({ error: "An error occurred while updating the session." });
     }
-
-    // Respond to confirm the operation
-    res.send("Session ID has been updated successfully.");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -445,7 +431,7 @@ app.get("/signout", connectEnsureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 app.get("/signout", (req, res) => {
-  req.logout(); // If using passport.js or session-based login
+  req.logout();
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).send("Could not log out");
@@ -458,13 +444,11 @@ app.post("/updateIncreaseTeamSize", isAuthenticated, async (req, res) => {
   try {
     const { sessionId } = req.body;
 
-
     if (!sessionId) {
       return res.status(400).json({ error: "sessionId is required." });
     }
 
     const session = await Sessions.findByPk(sessionId);
-
 
     if (!session) {
       return res.status(404).json({ error: "Session not found." });
@@ -511,10 +495,8 @@ app.post("/updateDecreaseTeamSize", isAuthenticated, async (req, res) => {
     }
 
     if (session.teamAsize < session.teamBsize) {
-
       session.teamAsize -= 1;
     } else if (session.teamBsize < session.teamAsize) {
-
       session.teamBsize -= 1;
     } else {
       return res
